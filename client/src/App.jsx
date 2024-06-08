@@ -4,18 +4,20 @@ import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import Dashboard from "./pages/Dashboard"
 import Porject from "./pages/Porject"
+import Header from "./components/Header"
+import Home from "./pages/Home"
 
 export default function App() {
   return (
    <BrowserRouter>
+   <Header/>  
    <Routes>
-    {/* i need to make the home page  */}
-    {/* <Route path="/" element={<Home/>}> */}
+    <Route path="/" element={<Home/>}></Route>
     <Route path="/about" element={<About/>}></Route>
-    <Route path="/Signin" element={<SignIn/>}></Route>
-    <Route path="/SignUp" element={<SignUp/>}></Route>
-    <Route path="/Dashboard" element={<Dashboard/>}></Route>
-    <Route path="/Project" element={<Porject/>}></Route>
+    <Route path="/signin" element={<SignIn/>}></Route>
+    <Route path="/signup" element={<SignUp/>}></Route>
+    <Route path="/dashboard" element={<Dashboard/>}></Route>
+    <Route path="/project" element={<Porject/>}></Route>
    </Routes>
    </BrowserRouter>
   )
