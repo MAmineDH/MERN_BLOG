@@ -22,3 +22,13 @@ app.listen(3000,()=>{
 
 app.use('/user', userrouter)
 app.use('/api/auth',authrouter)
+//midelware 
+app.use((err,req,res,next)=>{
+    const StatusCode = err.StatusCode || 500 ;
+    const message = err.message || 'internal server err'
+    res.status(StatusCode).json({
+        success : false,
+        StatusCode,
+        message 
+    })
+});
