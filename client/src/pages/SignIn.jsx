@@ -1,6 +1,30 @@
+/* eslint-disable no-unused-vars */
+
 import { Link } from "react-router-dom";
 import { Button, Label, TextInput } from "flowbite-react";
+import { useState } from "react";
 export default function SignIn() {
+  const [formdata , setFormData] = useState({})
+  const handelChange =(e)=>{
+    setFormData({...formdata , [e.target.id] : e.target.value})
+  };
+  const handlesubmit = async(e)=>{
+    e.preventDefault();
+    try{
+      const res = await fetch('/api/auth/signup',{
+        method : 'POST',
+        headers : {'Content-Type': 'application/json'},
+        body :JSON.stringify(formdata),
+      });
+
+      const data = await res.json();
+    }
+    catch(error){
+      alert('An erroe occured !')
+    }
+
+  }
+  console.log(formdata,'this is the from data rigth now')
   return (
     <div className="min-h-screen mt-20">
       <div className=" gap-5 flex p-4 max-w-3xl mx-auto  flex-col md:flex-row md:items-center">
@@ -18,26 +42,36 @@ export default function SignIn() {
         </div>
         {/* rigth */}
         <div className="flex-1">
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handlesubmit}>
             <div>
               <Label value="Your user name " />
               <TextInput type="text"
               placeholder="Name"
               id="username"
+
+              onChange={(e)=>{
+                handelChange(e)
+              }}
               />
             </div>
             <div>
               <Label value="Your user Email " />
               <TextInput type="text"
               placeholder="Email"
-              id="userEmail"
+              id="email"
+              onChange={(e)=>{
+                handelChange(e)
+              }}
               />
             </div>
             <div>
               <Label value="Your Password" />
               <TextInput type="password"
               placeholder="Password"
-              id="pwd"
+              id="password"
+              onChange={(e)=>{
+                handelChange(e)
+              }}
               />
             </div>
             <Button gradientDuoTone={'purpleToPink'} 
@@ -48,7 +82,7 @@ export default function SignIn() {
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span>Have an account ?</span>
-            <Link to={'/signup'} className="text-blue-500"> Sign In</Link>
+            <Link to={'/signup'} className="text-blue-500"> Sign Up</Link>
           </div>
         </div>
       </div>
